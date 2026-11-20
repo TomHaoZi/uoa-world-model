@@ -550,7 +550,14 @@ export function WalkerPanel() {
           <div class="hud-views walker-views" role="group" aria-label={t("walker.view.label")}>
             <Icon name="camera" size={16} />
             {VIEWS.map((v) => (
-              <button type="button" class={v === view ? "on" : ""} aria-pressed={v === view} data-view={v} onClick={() => setView({ view: v, name: MY_WALKER })}>
+              <button
+                type="button"
+                class={v === view ? "on" : ""}
+                aria-pressed={v === view}
+                data-view={v}
+                title={v === "eyes" ? t("walker.view.eyesHint") : undefined}
+                onClick={() => setView({ view: v, name: MY_WALKER })}
+              >
                 {t(`walker.view.${v}`)}
               </button>
             ))}

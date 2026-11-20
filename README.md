@@ -1,260 +1,74 @@
-<div align="center">
+# UoA World Model · 奥克兰大学三维校园
 
-# Campus World Model
+在浏览器里走过 City Campus 的钟楼，驾驶无人机越过屋顶，再打开教学楼的楼层剖面。这个本地预览版默认加载奥克兰大学，随仓库提供运行所需的校园数据，不需要提供照片或配置地图 API 密钥。
 
-**Unofficial**, student-made 3D maps of university campuses in New Zealand: buildings, floors and
-teaching rooms you can fly over, step into and walk round.
+这是基于 **Campus World Model** 的非官方开源分支。原项目由学生制作，页面使用项目自己的名称、图标和配色。 [上游项目与英文文档](https://github.com/pengqianhan/campus-world-model/tree/40d0dd3a3f945e13dfaa39355f6be22b62a736fe)
 
-**Live site: https://campusworldmodel.com/**
+## 演示视频
 
-[![Deploy](https://github.com/pengqianhan/campus-world-model/actions/workflows/deploy.yml/badge.svg)](https://github.com/pengqianhan/campus-world-model/actions/workflows/deploy.yml)
-[![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
+[![无人机视角下的钟楼与 City Campus。点击打开 GitHub 演示发布页。](docs/media/uoa-fly.webp)](https://github.com/TomHaoZi/uoa-world-model/releases/tag/v0.1.0-uoa-preview)
 
-[Schools](#schools) · [Features](#features) · [Quick start](#quick-start) ·
-[Documentation](#documentation) · [What's new](#whats-new) · [Contributing](#contributing)
+视频录自本地浏览器，时长 44 秒，分辨率 1440 × 900，带中文字幕。 [GitHub Release](https://github.com/TomHaoZi/uoa-world-model/releases/tag/v0.1.0-uoa-preview) · [下载 MP4](https://github.com/TomHaoZi/uoa-world-model/releases/download/v0.1.0-uoa-preview/uoa-campus-tour.mp4)
 
-</div>
+- **00:00** 从 City Campus 总览进入第一人称步行，朝钟楼走。
+- **00:14** 使用 **Fly** 起飞，俯瞰钟楼屋顶和周边建筑。
+- **00:34** 切换 General Library 的楼层，查看 109-305 实验室。
 
-> [!NOTE]
-> This is an unofficial project. No map here is affiliated with, endorsed by or maintained by the
-> university it shows, and none uses a university's logo or brand colours: the name, the palette
-> and the favicon are the project's own.
+## 校园里可以做什么
 
-![The University of Auckland's City Campus by day](docs/campus-day.jpg)
+### 在地面探索
 
-| Inside a building: floor G of the Science Centre | The same campus at night |
-| --- | --- |
-| ![A lecture theatre selected on a cut-away floor](docs/room.jpg) | ![The campus at night with lit windows](docs/campus-night.jpg) |
+![第一人称视角中的钟楼、树林与 Princes Street。](docs/media/uoa-walk.webp)
 
-| Behind the walker on Symonds Street | Albert Park at night, through the walker's eyes |
-| --- | --- |
-| ![The walker from behind on a street with lane lines, kerbs, trees and buildings drawn by rule](docs/walker-street.jpg) | ![A park at night with trees, stars and the city's lit windows beyond](docs/walker-night.jpg) |
+点 **Take a walk** 从钟楼附近出发。**Behind** 适合边走边观察角色周围，**Eyes** 会把镜头移到第一人称，**Map** 可以从上方查看位置。用 `WASD` 或方向键移动，按住 `Shift` 跑步，拖动场景转头。手机和平板可用画面上的摇杆和触控按钮。
 
-The project began as **UoA World Model**, a map of the University of Auckland built to answer two
-questions a student actually has:
+### 飞过建筑
 
-1. *Which building and floor is my room in?* Type a room code such as `303-G23`, a building name or
-   number, and the camera flies to it. Click any building to step inside and browse its floors and
-   rooms.
-2. *Is a class timetabled in this room right now?* The feature is built and tested, but the site
-   shows **no class times yet**: the University's timetable cannot be read without signing in, and
-   nothing is made up to fill the gap (see
-   [Adding the class timetable](docs/development.md#adding-the-class-timetable)).
+在校园总览点 **Fly** 可直接进入第一人称无人机视角。步行途中也可点 **Fly** 或按 `3` 起飞。用 `E` 或空格上升、`Q` 或 `C` 下降，按 `1` 落地。可以从低处看钟楼的尖顶和窗格，也可以升高观察 Princes Street、Albert Park 与校园建筑之间的位置。飞行最高为距地面 120 米。
 
-## Schools
+### 查看楼层和房间
 
-Each map is unofficial: it is not affiliated with, endorsed by or maintained by the university
-named beside it.
+![总图书馆三楼的三维楼层剖面与 109-305 房间信息卡。](docs/media/uoa-library.webp)
 
-| Map | University | Campuses | Shows |
-| --- | --- | --- | --- |
-| [UoA World Model](https://campusworldmodel.com/uoa/) | University of Auckland | City, Grafton, Newmarket, Tai Tokerau, Tai Tonga, Leigh, Waiheke, Ardmore | Buildings, floors and rooms |
-| [AUT World Model](https://campusworldmodel.com/aut/) | Auckland University of Technology | City, North, South | Buildings |
-| [VUW World Model](https://campusworldmodel.com/vuw/) | Te Herenga Waka—Victoria University of Wellington | Kelburn, Pipitea, Te Aro | Buildings |
-| [Otago World Model](https://campusworldmodel.com/otago/) | University of Otago | Dunedin, Christchurch | Buildings |
-| [UC World Model](https://campusworldmodel.com/uc/) | University of Canterbury | Ilam, Dovedale, the Arts Centre | Buildings |
-| [Massey World Model](https://campusworldmodel.com/massey/) | Massey University | Manawatū, Auckland, Wellington | Buildings |
-| [Waikato World Model](https://campusworldmodel.com/waikato/) | University of Waikato | Hamilton | Buildings |
-| [Lincoln World Model](https://campusworldmodel.com/lincoln/) | Lincoln University | Lincoln | Buildings, chosen by OpenStreetMap's tags |
+点击建筑进入楼层剖面，切换楼层后可选择房间。在 **Search** 中输入楼名、建筑编号或房号可直接定位。例如 `109-305` 对应 General Library 三楼的一间实验室，`303-G23` 位于 Science Centre。
 
-The University of Auckland's map is also at https://pengqianhan.github.io/campus-world-model/.
-Every school's sources, licences and limits are in [About](https://campusworldmodel.com/#about),
-and what each school publishes and what is closed is recorded in [docs/schools/](docs/schools/).
+## 本地启动
 
-## Features
-
-- **A rotatable miniature of every campus.** For the University of Auckland, 194 buildings stacked
-  floor by floor from the public campus map, on a base of OpenStreetMap streets, parks, trees and
-  surrounding buildings, over the real ground.
-- **A cut-away view of every building.** Pick a floor and see its lecture theatres, teaching rooms,
-  labs, studios and study spaces set in the rest of the floor plan.
-- **Search** over 786 learning spaces, 4,573 further rooms, 194 buildings and 251 subject codes.
-  Māori names match with or without macrons.
-- **Now and Preview.** Auckland time or any day and time, with the academic calendar, the sun where
-  it stands, the current weather from Open-Meteo and trees that turn with the seasons.
-- **A walker.** A small made-up person to walk, scoot or fly round the campus, seen from above,
-  from behind or through its eyes. Coding agents can steer it from the command line or over MCP.
-- **Landmarks drawn from code.** Some buildings are drawn in detail in three.js from code alone,
-  sized by LiDAR, in place of the blocks drawn by rule.
-- **Every view is a link.** Building, floor, room, time and language are all in the URL.
-- **A phone layout,** and all interface text in one locale file, ready for more languages.
-- **Real or absent.** Every published record traces to a public source, precision is labelled on
-  screen, and where no source exists the site shows nothing and says so.
-
-## Quick start
-
-Requires Node 22.18 or newer.
+使用项目要求的 Node.js 22.18 或更新版本。选用 **Node 22 LTS** 可以同时满足锁定版本的测试依赖。浏览器需要支持 WebGL 2。
 
 ```bash
-git clone https://github.com/pengqianhan/campus-world-model.git
-cd campus-world-model
+git clone https://github.com/TomHaoZi/uoa-world-model.git
+cd uoa-world-model
 npm ci
-npm run dev        # http://localhost:5273/campus-world-model/
+npm run dev
 ```
 
-| Command | What it does |
-| --- | --- |
-| `npm test` | Unit tests |
-| `npm run typecheck` | TypeScript check |
-| `npm run build` | Production build into `dist/` |
-| `npm run e2e` | Playwright tests against the built site |
-| `SCHOOL=<id> npm run build` | Build another school's map, such as `SCHOOL=aut`, into `dist-<id>/` |
+在浏览器地址栏打开下列任一地址。运行中的终端会显示 Vite 的本地地址。
 
-The site is static: three.js, Preact and Vite, with a data pipeline in TypeScript. Every merge
-into `main` is tested and published. Testing, deployment, the layout of the code and how to add a
-language are in [docs/development.md](docs/development.md).
+- [校园总览](http://localhost:5273/campus-world-model/)
+- [日间第一人称步行](http://localhost:5273/campus-world-model/?walk=1&view=eyes&light=day)
+- [日间第一人称飞行](http://localhost:5273/campus-world-model/?walk=1&view=eyes&ride=fly&light=day)
+- [总图书馆三楼 109-305](http://localhost:5273/campus-world-model/?building=109&floor=3&room=109-305)
 
-## Walk the campus
+`npm run build` 将静态站点构建到 `dist/`。`npm run typecheck` 检查类型，`npm test` 运行单元测试。项目使用 Three.js 渲染地形和建筑，Preact 负责界面，Vite 提供开发和构建环境。 [开发说明](docs/development.md) · [浏览器与 Walker CLI 操作](docs/walker.md)
 
-In the browser, "Take a walk" (or `?walk=1` in the address) puts the walker on the map: W A S D to
-walk, Shift to run, a scooter and a drone beside it. An agent that runs shell commands steers the
-same walker:
+## 数据覆盖与细节
 
-```bash
-npm run walker -- look                # buildings round it: distance, direction, what is ahead
-npm run walker -- walk 109-305        # a room: into its building, up to its floor, to the room
-npm run walker -- see --view eyes     # a picture through its eyes
-npm run walker -- help                # every command
-```
+仓库随附的奥克兰大学快照收录 **194 栋建筑、786 个学习空间、4,573 个已索引房间和 14,840 个楼层平面图形**。覆盖 City、Grafton、Newmarket、Tai Tokerau、Tai Tonga、Ardmore、Leigh 和 Waiheke。 [快照元数据](public/data/uoa/meta.json)
 
-The same commands are MCP tools (`claude mcp add campus-walker -- node scripts/walker/mcp.ts`). The
-controller runs on your computer only. More in [docs/walker.md](docs/walker.md).
+钟楼、Old Government House、Science Centre 等地标有按公开测量数据制作的精细模型。其他建筑的立面细节、楼层和高度会随来源覆盖变化，界面会标注估算值。楼层剖面来自公开平面数据，门的位置及需要登录的课堂课表未纳入。截图和视频均为三维场景的渲染画面。 [地标清单](docs/landmarks.md) · [数据限制](docs/limitations.md)
 
-## Landmarks drawn from code
-
-The map draws every building by rule from its outline. A **landmark** is one real building drawn in
-detail instead, in three.js from code alone: no photograph, texture image or 3D model is used. The
-LINZ 2024 LiDAR gives its sizes, photographs are references each render is compared with and are
-never published, and each building's card says what is estimated.
-
-| | |
-| --- | --- |
-| ![The Clock Tower from Princes St, drawn from code](docs/landmarks/clocktower-front.jpg) | ![Old Government House from its lawn, the garden front, drawn from code](docs/landmarks/old-government-house-front.jpg) |
-
-The landmarks are listed in [docs/landmarks.md](docs/landmarks.md). Each has a folder of its own
-under [landmarks/](landmarks/README.md), whose README describes it, with its pictures and its scores
-against the LiDAR and the photographs.
+本预览版使用内置天况，保留日夜、时间预览和季节效果。校园模型沿用上游数据快照，并保留地图上的来源标注。
 
 ## What's new
 
-The three latest days are below; everything, with its pull request, is in the
-[changelog](CHANGELOG.md).
-
-<details>
-<summary><strong>Latest changes</strong></summary>
-
-- **2026-11-14:** the walk has a game, Study Quest, off until you start it: grow by learning, beat made-up study
-  troubles such as the DDL, and pass the Final Exam in a boss fight, to music made in the browser that follows the fight; its first minute
-  teaches by play with one small prompt at a time, and a defeat can be retried at once. The Final Exam is an hourglass
-  titan whose sand runs down with its health and whose face hardens each phase, and the fight's camera keeps the
-  walker in sight through its charges. The walker moves as in an action game: the stick points the way on the screen,
-  it faces the boss and side-steps round it, and it rolls, hops or side-steps the way it dodges. It jumps, too (Space,
-  or a button on a phone): a running leap at a run that carries its stride and its pace on, over the boss's
-  shockwaves, and with a slash as it lands; Shift tapped dodges and held runs. Every part of it is made up (#178).
-- **2026-11-14:** every school has a list of its buildings at `/<school>/buildings/`, and each University of
-  Auckland building with learning spaces has a page of its floors and rooms, each room a link to it on the map.
-- **2026-11-14:** search engines and AI assistants can read the site: each page names its one address and a picture
-  for link previews, each school's page says in its HTML what its map shows, the home page answers common
-  questions, and the site has a sitemap, `robots.txt` and `llms.txt`.
-- **2026-11-13:** on the home page, About and the link to the source code stand on the heading's line as plain
-  links, where two dark buttons stood above it.
-- **2026-11-12:** on the Newmarket campus the map draws Structures Hall in detail, where it stood as a measured
-  massing: two long blocks under roofs of one slope with three stacks between them, and a glazed south face over a
-  ground storey set back behind piers and braces. Its sizes come from the LiDAR; it was compared with a
-  photograph, which is not published, and its card says what is estimated.
-- **2026-11-12:** on the Newmarket campus the map draws Building 903 in detail, where it stood as a measured
-  massing: a box clad in pale corrugated metal over two glazed storeys set back on piers, under a low roof of two
-  slopes. Its sizes come from the LiDAR; it was compared with a photograph, which is not published, and its card
-  says what is estimated.
-- **2026-11-12:** on the City campus the map draws Security in detail, where it stood as a measured massing: a
-  band of pale concrete over a glazed ground storey set back on columns, its south corner cut, with a deck and
-  steps before it. Its sizes come from the LiDAR; it was compared with a photograph, which is not published, and
-  its card says what is estimated.
-- **2026-11-12:** on the City campus the map draws 58 Symonds Street in detail, where it stood as a measured massing:
-  a tower of eight storeys of windows over a dark ground storey, a pale band at every floor with louvres hung under it,
-  and piers between the windows. Its sizes come from the LiDAR; it was compared with a photograph, which is not
-  published, and its card says what is estimated.
-
-</details>
-
-## Documentation
-
-| Document | What it covers |
-| --- | --- |
-| [docs/development.md](docs/development.md) | Running, testing and deploying; the layout of the code; updating the data snapshot; adding the class timetable; adding a language |
-| [docs/walker.md](docs/walker.md) | The walker in the browser, from the command line and over MCP |
-| [docs/landmarks.md](docs/landmarks.md) | What a landmark is, and the list of them; each one is described in its own folder under `landmarks/` |
-| [docs/data-sources.md](docs/data-sources.md) | Every source, what it is used for and its terms, school by school |
-| [docs/limitations.md](docs/limitations.md) | What the maps cannot say, and where a drawing is estimated |
-| [docs/schools/](docs/schools/) | How schools share one site, and what each school publishes |
-| [docs/standards.md](docs/standards.md) | The checks a change passes before it merges |
-| [CHANGELOG.md](CHANGELOG.md) | Every change to the site, dated |
-| [AGENTS.md](AGENTS.md) | The rules every change keeps, for people and for coding agents |
+本预览版在校园总览加入 **Fly** 快捷入口，打开时即可驾驶第一人称无人机。**Eyes** 按钮增加了第一人称提示。 [更新记录](CHANGELOG.md)
 
 ## Data sources and licences
 
-| Source | Used for | Terms |
-| --- | --- | --- |
-| [University of Auckland campus maps](https://maps.auckland.ac.nz/) and [Calendar](https://www.auckland.ac.nz/en/about-us/about-the-university/the-university/official-publications/university-calendar/current-calendar.html) | Buildings, floors and rooms; semester dates and subject codes | © University of Auckland. Only derived facts are published |
-| [OpenStreetMap](https://www.openstreetmap.org/copyright) | Surroundings of every campus; the buildings of every other school | © OpenStreetMap contributors, [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/) |
-| [LINZ 8 m Digital Elevation Model](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/) | The height of the ground | [CC BY 3.0 NZ](https://creativecommons.org/licenses/by/3.0/nz/) |
-| [Auckland LiDAR point cloud (2024)](https://doi.org/10.5069/G9HH6H8T) and LINZ aerial photographs | The sizes of landmarks and measured buildings | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| [Open-Meteo](https://open-meteo.com/) | Current weather, fetched by the visitor's browser | [CC BY 4.0](https://open-meteo.com/en/licence) |
-| ["Animated Human" by Quaternius](https://opengameart.org/content/animated-human-low-poly) | The walker's body | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+- **奥克兰大学公开校园地图与校历** 提供建筑、楼层、房间位置及学期日期，相关版权归奥克兰大学。 [上游数据说明](docs/data-sources.md)
+- **OpenStreetMap contributors** 提供周边街道、绿地和建筑轮廓，适用 ODbL 1.0。 [OpenStreetMap 版权说明](https://www.openstreetmap.org/copyright)
+- **Land Information New Zealand（LINZ）** 的地形数据适用 CC BY 3.0 NZ。地标测量使用的 Auckland 2024 LiDAR 适用 CC BY 4.0。 [地形来源](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/) · [LiDAR 来源](https://doi.org/10.5069/G9HH6H8T)
+- **Quaternius** 的 Animated Human 角色资源适用 CC0 1.0。 [角色来源](https://opengameart.org/content/animated-human-low-poly)
 
-The full table, with each school's part, the photographs used as references only and what is left
-out, is in [docs/data-sources.md](docs/data-sources.md).
-
-The **code** is under the MIT licence (see [LICENSE](LICENSE)). That licence does not cover the
-data above; [NOTICE](NOTICE) says so too.
-
-If you represent a university shown here and would like something changed or removed, please open
-an issue.
-
-## Known limitations
-
-- **No class times** until a timetable snapshot is added, and a timetabled class is not the same
-  as an occupied room.
-- **Building heights are estimated and windows are drawn by rule,** except for the landmarks and
-  the buildings measured from LiDAR.
-- **Only learning spaces are named and can be selected.** Floors where people live and childcare
-  centres stay blank.
-- **Every school but the University of Auckland shows buildings only,** from OpenStreetMap.
-- **The walker knows no doors, gates or fences,** and the academic calendar covers 2026 only.
-
-The full list is in [docs/limitations.md](docs/limitations.md).
-
-## Porting to another university
-
-Most of the code carries over to another campus; the data pipeline and a handful of
-Auckland-specific places do not. `.claude/skills/campus-world-model/` is a
-[Claude Code](https://claude.com/claude-code) skill that takes an agent through a port: recon of
-the new school's public data, rebuilding the pipeline, shipping the site and verifying it live.
-Fork or clone this repository, open it in Claude Code and run
-`/campus-world-model <university, campus>`. Beside it, `.claude/skills/street-look/` takes the
-walker's street-level look to a world model that lacks it, or tunes it for another city:
-`/street-look bring` or `/street-look tune`.
-
-## Contributing
-
-Reports and fixes are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). The rules every change keeps
-and the checks it passes are written for people and for coding agents alike, in
-[AGENTS.md](AGENTS.md) and [docs/standards.md](docs/standards.md).
-
-## Inspiration
-
-This project was inspired by the
-[Tsinghua World Model](https://tsinghua-world-model.pages.dev/?campus=1&classMode=live), an
-independent student project that lets you walk through Tsinghua University's campus and find
-courses and classrooms in it. The idea of a campus you can step into comes from there. The code,
-models and data here were made separately; nothing is copied from that site.
-
-## Star history
-
-<a href="https://www.star-history.com/#pengqianhan/campus-world-model&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=pengqianhan/campus-world-model&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=pengqianhan/campus-world-model&type=Date" />
-    <img alt="A chart of this repository's GitHub stars over time" src="https://api.star-history.com/svg?repos=pengqianhan/campus-world-model&type=Date" />
-  </picture>
-</a>
+源代码采用 [MIT License](LICENSE)。地图数据各自适用其来源条款，详见 [NOTICE](NOTICE)。

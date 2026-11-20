@@ -313,6 +313,20 @@ test("on a scooter the walker goes faster on the same ways; a drone flies in its
   await expect(page.locator(".topbar")).toBeVisible();
 });
 
+test("Fly on the campus map starts an airborne first-person view and keeps it in the address", async ({ page }) => {
+  await open(page, `?${QUERY}`);
+  await ready(page);
+  await page.locator("#fly-start").click();
+  await expect(page.locator('#walker-panel [data-view="eyes"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('#walker-panel [data-ride="fly"]')).toHaveAttribute("aria-pressed", "true");
+  await expect.poll(async () => {
+    const state = (await walker(page, "list")) as { walkers: { altitude?: number }[] };
+    return state.walkers[0]?.altitude ?? 0;
+  }).toBeGreaterThan(10);
+  await expect.poll(() => Object.fromEntries(new URL(page.url()).searchParams)).toMatchObject({ walk: "1", view: "eyes", ride: "fly" });
+  await expectRealRender(page);
+});
+
 test("Study Quest is off until asked for; its title says it is made up; the first minute is taught by prompts that come once; books lead to the DDL, a strike lands, the pause stops its clock; burnt out, a retry starts the quest again, the debrief grades the run by its factors, and a game played again starts at once; ending it clears the map", async ({ page }) => {
   // The game's rules move on a tenth of a second at most in a frame (Quest.step), so the waits for
   // its foes and its books are counted in frames, not seconds. In software a frame of a game takes a

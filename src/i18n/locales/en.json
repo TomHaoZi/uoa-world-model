@@ -363,7 +363,8 @@
   },
   "walker": {
     "start": "Take a walk",
-    "startHint": "Walk the campus, ride a scooter round it or fly a drone over it, as in a game",
+    "startHint": "Explore the campus on foot",
+    "flyStartHint": "Take off in first-person drone view",
     "heading": "Walk",
     "close": "Stop",
     "closeHint": "Stop the walk and go back to the map",
@@ -371,7 +372,8 @@
       "label": "View",
       "map": "Map",
       "follow": "Behind",
-      "eyes": "Eyes"
+      "eyes": "Eyes",
+      "eyesHint": "First-person view"
     },
     "ride": {
       "label": "How it gets about",

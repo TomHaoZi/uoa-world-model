@@ -6,7 +6,6 @@ import { data, loadError, readUrl, startClock, startUrlSync } from "./app/state.
 import { startWalkerFromUrl } from "./app/walker.ts";
 import { App } from "./ui/App.tsx";
 import { ABOUT_HREF } from "./ui/common.tsx";
-import { loadWeather } from "./ui/weather.ts";
 import "./ui/styles.css";
 
 // About left the map for the site's root on 2026-11-10: an address saved while it was open goes there.
@@ -31,10 +30,6 @@ loadData()
     });
     startWalkerFromUrl();
     startUrlSync();
-    // Decorative and optional: fetched after the map is up, and again each half hour, as often
-    // as Open-Meteo's current conditions change.
-    setTimeout(() => void loadWeather(), 1500);
-    setInterval(() => void loadWeather(), 30 * 60 * 1000);
   })
   .catch((e) => {
     console.error(e);

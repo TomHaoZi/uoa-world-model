@@ -463,7 +463,7 @@ test("the campus's and the walk's buttons stay clear of the attribution at every
     await page.setViewportSize({ width, height: 800 });
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
     const attribution = (await page.locator("#attribution").boundingBox())!;
-    for (const id of ["#status-toggle", "#walk-start"]) {
+    for (const id of ["#status-toggle", "#walk-start", "#fly-start"]) {
       const box = (await page.locator(id).boundingBox())!;
       expect(apart(box, attribution), `${id} clear of the attribution at ${width} px, ${longest.name}`).toBe(true);
       expect(box.x + box.width, `${id} inside the screen at ${width} px`).toBeLessThanOrEqual(width);

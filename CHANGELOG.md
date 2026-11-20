@@ -14,6 +14,12 @@ A change to what the site does or shows adds its line here, and the README's
   the Classes API key arrives, so that what the timetable and the catalogue each supply can be
   settled with both in hand.
 
+## 2026-11-20 · UoA preview fork
+
+- **Fly from the campus map.** The Fly button next to Take a walk starts a drone in first-person
+  view. The Eyes button says what it does when a pointer rests on it.
+- **Use the bundled sky.** The local preview keeps time and seasons and loads no live weather.
+
 ## 2026-11-14
 
 ### Added

@@ -1,15 +1,9 @@
-// The sky over the campus: the sun where it really stands at the time shown, deciduous trees by
-// the season, and in Now mode the current weather from Open-Meteo.
+// The sky over the campus: the sun where it really stands at the time shown, and deciduous trees
+// by the season. The local edition uses the built-in sky in Now mode too.
 import { expect, test, type Page } from "@playwright/test";
 import { open, shot } from "./helpers.ts";
 
 const light = (page: Page) => page.evaluate(() => window.__scene!.lightState());
-
-/** Open-Meteo's answer, served only inside the test browser. */
-async function weatherNow(page: Page, current: Record<string, number>): Promise<void> {
-  await page.unroute("**/api.open-meteo.com/**");
-  await page.route("**/api.open-meteo.com/**", (route) => route.fulfill({ json: { current } }));
-}
 
 test("the sun stands where it really does at the time shown, and deciduous trees follow the season", async ({ page }) => {
   // Winter noon: the sun due north and low, 90° - 36.85° - 23.44°.
@@ -44,31 +38,17 @@ test("the sun stands where it really does at the time shown, and deciduous trees
   expect(l.deciduous).not.toBe(winter);
 });
 
-test("in Now mode the sky follows Open-Meteo's current weather: rain falls and darkens the streets, fog hazes the view", async ({ page }) => {
-  await weatherNow(page, { temperature_2m: 14.2, weather_code: 63, cloud_cover: 100, precipitation: 2.4, wind_speed_10m: 28, wind_direction_10m: 250 });
+test("Now mode draws the built-in sky without requesting live weather", async ({ page }) => {
+  const requests: string[] = [];
+  await page.route("**/api.open-meteo.com/**", (route) => {
+    requests.push(route.request().url());
+    return route.abort();
+  });
   await open(page, "");
-  await page.waitForFunction(() => !!window.__scene!.lightState().weather);
-  let l = await light(page);
-  expect(l.weather!.wet).toBe(1);
-  expect(l.weather!.cloud).toBeGreaterThanOrEqual(0.85);
-  expect(l.fog).toBe(false);
-  await expect(page.locator("#rain-layer")).toBeVisible();
-  await expect(page.locator(".chip-weather")).toContainText("14°");
-  await shot(page, "17-weather-rain");
-
-  // Fog: no rain, a hazy distance.
-  await weatherNow(page, { temperature_2m: 11, weather_code: 45, cloud_cover: 100, precipitation: 0, wind_speed_10m: 4, wind_direction_10m: 90 });
-  await open(page, "");
-  await page.waitForFunction(() => window.__scene!.lightState().weather?.fog === 1);
-  l = await light(page);
-  expect(l.fog).toBe(true);
-  await expect(page.locator("#rain-layer")).toHaveCount(0);
-
-  // Preview shows no weather: past and future weather is not known here.
-  await open(page, "?time=preview&date=2026-08-12&t=14:05");
+  // The upstream startup request waited 1.5 seconds after the map loaded.
   await page.waitForTimeout(2000);
-  l = await light(page);
-  expect(l.weather).toBeUndefined();
-  expect(l.fog).toBe(false);
+  expect(requests).toEqual([]);
+  expect((await light(page)).weather).toBeUndefined();
+  await expect(page.locator(".chip-weather")).toHaveCount(0);
   await expect(page.locator("#rain-layer")).toHaveCount(0);
 });

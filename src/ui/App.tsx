@@ -10,7 +10,7 @@ import { SearchPanel } from "./SearchPanel.tsx";
 import { TimePanel, notTeachingReason, previewTeachingDay } from "./TimePanel.tsx";
 import { TopBar, statusLine } from "./TopBar.tsx";
 import { WalkerPanel } from "./WalkerPanel.tsx";
-import { MY_WALKER, setView, startLook, startWalkerKeys, startWalking, stopWalking, walkerOn, walkerView } from "../app/walker.ts";
+import { MY_WALKER, rideAs, setView, startLook, startWalkerKeys, startWalking, stopWalking, walkerOn, walkerView } from "../app/walker.ts";
 import { gameMenu, gameOn, gamePlaying, setMenu, togglePause } from "../app/gameState.ts";
 
 /** Whether the campus panel is open. It starts shut, as a small button, so the map has the screen. */
@@ -22,10 +22,21 @@ function chooseCampus(id: string): void {
   goHome(id);
 }
 
+function startCampusTour(mode: "walk" | "fly"): void {
+  panel.value = "none";
+  const reply = startWalking();
+  if (mode === "fly") {
+    rideAs("fly");
+    setView({ view: "eyes", name: MY_WALKER });
+  } else {
+    // The start's view behind the walker takes in what the start faces, the Clock Tower on City Campus.
+    setView({ view: "follow", name: MY_WALKER, ...startLook(reply) });
+  }
+}
+
 /**
  * Campus-level summary: where we are in the academic year and what is timetabled right now, with
- * the campuses. Shut, it is a button with the campus's name, and the walk is
- * a button beside it.
+ * the campuses. Shut, it is a button with the campus's name beside the walk and fly buttons.
  */
 function StatusStrip() {
   const show = useRef<HTMLButtonElement>(null);
@@ -74,17 +85,15 @@ function StatusStrip() {
             type="button"
             class="walk-start"
             id="walk-start"
-            onClick={() => {
-              // The walk is a game: it starts behind the walker, with the whole screen; at the campus's start the view
-              // takes in what the start faces (on the City Campus, the Clock Tower).
-              panel.value = "none";
-              const reply = startWalking();
-              setView({ view: "follow", name: MY_WALKER, ...startLook(reply) });
-            }}
+            onClick={() => startCampusTour("walk")}
             title={t("walker.startHint")}
           >
             <Icon name="walk" />
             <span>{t("walker.start")}</span>
+          </button>
+          <button type="button" class="walk-start" id="fly-start" title={t("walker.flyStartHint")} onClick={() => startCampusTour("fly")}>
+            <Icon name="drone" />
+            <span>{t("walker.ride.fly")}</span>
           </button>
         </div>
       )}
